@@ -25,5 +25,31 @@ def type():
             time.sleep(0.1)
         return render_template("type.html")
 
+@app.route("/press", methods=["GET", "POST"])
+def press():
+    if request.method == "GET":
+        return render_template("press.html")
+    if request.method == "POST":
+        data_form_press = str(request.form.get("form_press"))
+        pyautogui.press(data_form_press)
+        return render_template("press.html")
+
+@app.route("/functii")
+def functii():
+    return render_template("functii.html")
+
+
+@app.route("/matei")
+def matei():
+    pyautogui.hotkey("win", "s")
+    time.sleep(0.2)
+    pyautogui.typewrite("notepad")
+    time.sleep(0.1)
+    pyautogui.press("enter")
+    time.sleep(0.1)
+    pyautogui.typewrite("matei e prea sexos pentru generatia asta")
+
+    return redirect(url_for("functii"))
+
 if __name__ == "__main__":
     app.run(debug=True, port=3000, host="192.168.0.213")
